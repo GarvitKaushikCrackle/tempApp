@@ -1,0 +1,27 @@
+{
+  "name": "tempFramework",
+  "version": "0.0.1",
+  "summary": "tempFramework is a test framework to test cocoapods. Hi I am garvit kaushik the developer of the tempFramework. I am pretty good coder.",
+  "description": "Here comes the description for the developer",
+  "homepage": "http://EXAMPLE/tempFramework",
+  "authors": {
+    "GarvitKaushikCrackle": "gkaushik@crackle.tech"
+  },
+  "platforms": {
+    "ios": "13.0"
+  },
+  "source": {
+    "path": ".",
+    "tag": "0.0.1"
+  },
+  "source_files": "tempFramework/**/*",
+  "static_framework": true,
+  "frameworks": "UIKit",
+  "dependencies": {
+    "Google-Mobile-Ads-SDK": [
+
+    ]
+  },
+  "swift_versions": "5.0",
+  "swift_version": "5.0"
+}
