@@ -8,7 +8,9 @@ target 'tempApp' do
 
   # Pods for tempApp
   pod 'Google-Mobile-Ads-SDK'
-  pod 'tempFramework', :path => '../tempFramework'
-  pod 'Alamofire'
-
+  pod 'AppLovinSDK'
+  pod 'IronSourceSDK','8.1.1.0'
+  pod 'CoreSDK', :path => '../../CoreSDK'
+  pod 'IronSourceAppLovinAdapter','4.3.46.2'
+  pod 'IronSourceAPSAdapter','4.3.13.4'
 end

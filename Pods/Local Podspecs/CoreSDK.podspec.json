@@ -1,0 +1,39 @@
+{
+  "name": "CoreSDK",
+  "version": "0.0.1",
+  "summary": "CoreSDK is built by Crackle to enable publishers to maximize their revenue.",
+  "description": "Use CoreSDK as a dependency in your app to monetize your application.",
+  "homepage": "http://EXAMPLE/CoreSDK",
+  "authors": {
+    "GarvitKaushikCrackle": "gkaushik@crackle.tech"
+  },
+  "platforms": {
+    "ios": "13.0"
+  },
+  "source": {
+    "path": ".",
+    "tag": "0.0.1"
+  },
+  "source_files": "CoreSDK/**/*",
+  "static_framework": true,
+  "frameworks": "UIKit",
+  "dependencies": {
+    "Google-Mobile-Ads-SDK": [
+
+    ],
+    "AppLovinSDK": [
+
+    ],
+    "IronSourceSDK": [
+
+    ],
+    "IronSourceAppLovinAdapter": [
+      "4.3.46.2"
+    ],
+    "IronSourceAPSAdapter": [
+      "4.3.13.4"
+    ]
+  },
+  "swift_versions": "5.0",
+  "swift_version": "5.0"
+}

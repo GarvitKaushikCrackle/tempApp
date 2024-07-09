@@ -1,32 +1,55 @@
 PODS:
-  - Alamofire (5.9.1)
+  - AmazonPublisherServicesSDK (4.9.3)
+  - AppLovinSDK (12.5.0)
+  - CoreSDK (0.0.1):
+    - AppLovinSDK
+    - Google-Mobile-Ads-SDK
+    - IronSourceAppLovinAdapter (= 4.3.46.2)
+    - IronSourceAPSAdapter (= 4.3.13.4)
+    - IronSourceSDK
   - Google-Mobile-Ads-SDK (11.5.0):
     - GoogleUserMessagingPlatform (>= 1.1)
   - GoogleUserMessagingPlatform (2.4.0)
-  - tempFramework (0.0.1):
-    - Google-Mobile-Ads-SDK
+  - IronSourceAppLovinAdapter (4.3.46.2):
+    - AppLovinSDK (= 12.5.0)
+    - IronSourceSDK (= 8.1.1.0)
+  - IronSourceAPSAdapter (4.3.13.4):
+    - AmazonPublisherServicesSDK (= 4.9.3)
+    - IronSourceSDK (= 8.1.1.0)
+  - IronSourceSDK (8.1.1.0)
 
 DEPENDENCIES:
-  - Alamofire
+  - AppLovinSDK
+  - CoreSDK (from `../../CoreSDK`)
   - Google-Mobile-Ads-SDK
-  - tempFramework (from `../tempFramework`)
+  - IronSourceAppLovinAdapter (= 4.3.46.2)
+  - IronSourceAPSAdapter (= 4.3.13.4)
+  - IronSourceSDK (= 8.1.1.0)
 
 SPEC REPOS:
   trunk:
-    - Alamofire
+    - AmazonPublisherServicesSDK
+    - AppLovinSDK
     - Google-Mobile-Ads-SDK
     - GoogleUserMessagingPlatform
+    - IronSourceAppLovinAdapter
+    - IronSourceAPSAdapter
+    - IronSourceSDK
 
 EXTERNAL SOURCES:
-  tempFramework:
-    :path: "../tempFramework"
+  CoreSDK:
+    :path: "../../CoreSDK"
 
 SPEC CHECKSUMS:
-  Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
+  AmazonPublisherServicesSDK: 637a51454e0d7c37c8cb75628b30129f58908a56
+  AppLovinSDK: 626d2aea57ae1bf9280d2012e8e20c521c58ce28
+  CoreSDK: 6846b6b275bd123ced2a3b134f9e52423653f877
   Google-Mobile-Ads-SDK: 7db2098033ad3bfcd72a11e7503b49700a93029e
   GoogleUserMessagingPlatform: f131fa7978d2ba88d7426702b057c2cc318e6595
-  tempFramework: 3ced33c8e656365caddbe347a0cfa6ecdc2ab9c0
+  IronSourceAppLovinAdapter: 1718640c1f4bf1381b3b5dacdcc373b43b2d817f
+  IronSourceAPSAdapter: bef973123fe8913aa612cfe52242941be79e4b7e
+  IronSourceSDK: f44778e8b9b76b33130b4cbc11e722ff1c7d1813
 
-PODFILE CHECKSUM: e47ad2c2988baac09a8e4c72bc1605b8d4b0d46f
+PODFILE CHECKSUM: bb82625529bb2610d0aa41891edceda4ce0f3a09
 
 COCOAPODS: 1.15.2

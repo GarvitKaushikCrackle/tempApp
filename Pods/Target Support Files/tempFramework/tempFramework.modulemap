@@ -1,6 +1,0 @@
-framework module tempFramework {
-  umbrella header "tempFramework-umbrella.h"
-
-  export *
-  module * { export * }
-}
