@@ -6,53 +6,56 @@
 //
 
 import UIKit
-import CoreSDK
-import AppLovinSDK
+import CrackleSDK
 
 class CardSelectionVC: UIViewController {
-    let nativeButton = CWButton(backgroundColor: .systemRed, title: "native")
     let bannerButton = CWButton(backgroundColor: .systemRed, title: "banner")
-    let largeBannerButton = CWButton(backgroundColor: .systemRed, title: "large banner")
-    let mrecButton = CWButton(backgroundColor: .systemRed, title: "MREC")
-//    let leaderBoardButton = CWButton(backgroundColor: .systemRed, title: "start 30s refresh")
     let intButton = CWButton(backgroundColor: .systemBlue, title: "Interstitial")
     let rewButton = CWButton(backgroundColor: .systemBlue, title: "Rewarded")
+    let rewIntButton = CWButton(backgroundColor: .systemBlue, title: "Rewarded Int")
     let natButton = CWButton(backgroundColor: .systemGreen, title: "Native")
     
     let adSpace = UIView()
-    var crackleAdView: CrackleAdView? = nil
-    var crackleAdLoader: CrackleAdLoader? = nil
+    
+    var crackleAdLoader: CrackleAdLoader!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        CoreSDK.shared.initialize(listener: crackleInitializationCompleteListener(viewController: self))
-        CoreSDK.shared.startLoadingAds(viewController: self, placementName: [])
+        CrackleSDK.shared.initialize(viewController: self){}
+//        CoreSDK.shared.startLoadingAds(viewController: self, placementName: [])
+        
+//        crackleAdLoader = CrackleAdLoader.Builder(viewController: self, adUnitId: "").forNativeAd(callback: {crackleNativeAd in
+//            let nativeAdView = Bundle.main.loadNibNamed("CustomNativeAdView", owner: nil, options: nil)?.first as! CrackleNativeAdView
+//            (nativeAdView.headlineView as? UILabel)?.text = "Garvit Kaushik"
+//            (nativeAdView.bodyView as? UILabel)?.text = crackleNativeAd.body
+//            (nativeAdView.callToActionView as? UIButton)?.setTitle(crackleNativeAd.callToAction, for: .normal)
+//            (nativeAdView.iconView as? UIImageView)?.image = crackleNativeAd.iconDrawable
+//            (nativeAdView.storeView as? UILabel)?.text = crackleNativeAd.store
+////            (nativeAdView.priceView as? UILabel)?.text = crackleNativeAd.price
+//            (nativeAdView.advertiserView as? UILabel)?.text = crackleNativeAd.advertiser
+//            nativeAdView.callToActionView?.isUserInteractionEnabled = false
+//            nativeAdView.registerNativeAd(crackleNativeAd: crackleNativeAd)
+//            nativeAdView.translatesAutoresizingMaskIntoConstraints = false
+//
+//            self.adSpace.addSubview(nativeAdView)
+//            NSLayoutConstraint.activate([
+//                nativeAdView.heightAnchor.constraint(equalToConstant: 50),
+//                nativeAdView.widthAnchor.constraint(equalToConstant: 320),
+//                nativeAdView.centerXAnchor.constraint(equalTo: self.adSpace.centerXAnchor)
+//            ])
+//        }).build()
+
         configureUI()
-        crackleAdView = CrackleAdView(rootViewController: self)
-        crackleAdLoader = CrackleAdLoader.Builder(viewController: self, adUnitId: "").build()
-//        CrackleInterstitialAd.shared.setListener(crackleAdListener: )
-//        CrackleInterstitialAd.shared.setFrequencyCapping(numberOfAds: 2, timeIntervalInSec: TimeInterval(30*60))
-//        startTimer()
-//        CrackleInterstitialAd.shared.loadAd()
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: {
-//            CrackleInterstitialAd.shared.showAd(viewController: self)
-//        })
     }
     
     func configureUI() {
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
-//            self.configureAds()
-//        }
         configureAdSpace()
-//        configureTextBox()
-        configureNativeButton()
         configureBannerButton()
-        configureLargeBannerButton()
-        configureMREC()
-//        configureLeaderBoardButton()
         configureIntButton()
         configureRewdButton()
+        configureRewIntButton()
+        configureNatButton()
     }
     
     func configureAdSpace() {
@@ -62,50 +65,9 @@ class CardSelectionVC: UIViewController {
         NSLayoutConstraint.activate([
             adSpace.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             adSpace.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            adSpace.heightAnchor.constraint(equalToConstant: 200),
-            adSpace.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -75)
+            adSpace.heightAnchor.constraint(equalToConstant: 350),
+            adSpace.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         ])
-    }
-    
-    func configureTextBox() {
-          
-//          // Set the dimensions
-//          textView.frame = CGRect(x: (self.view.frame.width - 320) / 2, y: (self.view.frame.height - 50) / 2, width: 320, height: 25)
-//          
-//          // Set the background color to white
-//          textView.backgroundColor = .white
-//          
-//          // Set the text color to black
-//          textView.textColor = .black
-//          
-//          // Set some sample text
-//          textView.text = "This is a sample text"
-//          
-//          // Optionally, configure additional properties
-//          textView.font = UIFont.systemFont(ofSize: 16)
-//          textView.textAlignment = .center
-//          textView.isEditable = false
-//          
-//          // Add the textView to the view hierarchy
-//          self.view.addSubview(textView)
-//        
-//        NSLayoutConstraint.activate([
-//            textView.leadingAnchor.constraint(equalTo: adSpace.leadingAnchor),
-//            textView.trailingAnchor.constraint(equalTo: adSpace.trailingAnchor),
-//            textView.heightAnchor.constraint(equalToConstant: 300),
-//            textView.centerYAnchor.constraint(equalTo: adSpace.centerYAnchor, constant: -75)
-//        ])
-      }
-    
-    func configureNativeButton() {
-//        view.addSubview(nativeButton)
-//        nativeButton.addTarget(self, action: #selector(loadNative), for: .touchUpInside)
-//        NSLayoutConstraint.activate([
-//            nativeButton.widthAnchor.constraint(equalToConstant: 260),
-//            nativeButton.heightAnchor.constraint(equalToConstant: 40),
-//            nativeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            nativeButton.topAnchor.constraint(equalTo: adSpace.bottomAnchor, constant: 30),
-//        ])
     }
     
     func configureBannerButton() {
@@ -119,39 +81,6 @@ class CardSelectionVC: UIViewController {
         ])
     }
     
-    func configureLargeBannerButton() {
-        view.addSubview(largeBannerButton)
-        largeBannerButton.addTarget(self, action: #selector(loadLarge), for: .touchUpInside)
-        NSLayoutConstraint.activate([
-            largeBannerButton.widthAnchor.constraint(equalToConstant: 260),
-            largeBannerButton.heightAnchor.constraint(equalToConstant: 40),
-            largeBannerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            largeBannerButton.topAnchor.constraint(equalTo: bannerButton.bottomAnchor, constant: 30),
-        ])
-    }
-    
-    func configureMREC() {
-        view.addSubview(mrecButton)
-        mrecButton.addTarget(self, action: #selector(loadMREC), for: .touchUpInside)
-        NSLayoutConstraint.activate([
-            mrecButton.widthAnchor.constraint(equalToConstant: 260),
-            mrecButton.heightAnchor.constraint(equalToConstant: 40),
-            mrecButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            mrecButton.topAnchor.constraint(equalTo: largeBannerButton.bottomAnchor, constant: 30),
-        ])
-    }
-    
-    func configureLeaderBoardButton() {
-//        view.addSubview(leaderBoardButton)
-//        leaderBoardButton.addTarget(self, action: #selector(loadLeaderBoard), for: .touchUpInside)
-//        NSLayoutConstraint.activate([
-//            leaderBoardButton.widthAnchor.constraint(equalToConstant: 260),
-//            leaderBoardButton.heightAnchor.constraint(equalToConstant: 40),
-//            leaderBoardButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            leaderBoardButton.topAnchor.constraint(equalTo: mrecButton.bottomAnchor, constant: 30),
-//        ])
-    }
-    
     func configureIntButton() {
         view.addSubview(intButton)
         intButton.addTarget(self, action: #selector(loadInt), for: .touchUpInside)
@@ -159,7 +88,7 @@ class CardSelectionVC: UIViewController {
             intButton.widthAnchor.constraint(equalToConstant: 260),
             intButton.heightAnchor.constraint(equalToConstant: 40),
             intButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            intButton.topAnchor.constraint(equalTo: mrecButton.bottomAnchor, constant: 30),
+            intButton.topAnchor.constraint(equalTo: bannerButton.bottomAnchor, constant: 30),
         ])
     }
     
@@ -174,6 +103,17 @@ class CardSelectionVC: UIViewController {
         ])
     }
     
+    func configureRewIntButton() {
+        view.addSubview(rewIntButton)
+        rewIntButton.addTarget(self, action: #selector(loadRewInt), for: .touchUpInside)
+        NSLayoutConstraint.activate([
+            rewIntButton.widthAnchor.constraint(equalToConstant: 260),
+            rewIntButton.heightAnchor.constraint(equalToConstant: 40),
+            rewIntButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            rewIntButton.topAnchor.constraint(equalTo: rewButton.bottomAnchor, constant: 30),
+        ])
+    }
+    
     func configureNatButton() {
         view.addSubview(natButton)
         natButton.addTarget(self, action: #selector(loadNative), for: .touchUpInside)
@@ -181,91 +121,18 @@ class CardSelectionVC: UIViewController {
             natButton.widthAnchor.constraint(equalToConstant: 260),
             natButton.heightAnchor.constraint(equalToConstant: 40),
             natButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            natButton.topAnchor.constraint(equalTo: rewButton.bottomAnchor, constant: 30),
+            natButton.topAnchor.constraint(equalTo: rewIntButton.bottomAnchor, constant: 30),
         ])
     }
     
-    @objc func loadNative() {
-        crackleAdLoader.loadAd()
-    }
-    
     @objc func loadBanner() {
-        if let crackleAdView = crackleAdView {
-            do {
-                try crackleAdView.setAdSizes(adSizes: [AdSize.banner])
-                crackleAdView.setListener(crackleAdViewAdListener: MyAdListener())
-                try crackleAdView.loadAd()
-                adSpace.addSubview(crackleAdView)
-                crackleAdView.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                    crackleAdView.centerXAnchor.constraint(equalTo: adSpace.centerXAnchor),
-                    crackleAdView.topAnchor.constraint(equalTo: adSpace.safeAreaLayoutGuide.topAnchor),
-                    crackleAdView.widthAnchor.constraint(equalToConstant: 320),
-                    crackleAdView.heightAnchor.constraint(equalToConstant: 50)
-                ])
-            } catch {
-                print("Error loading ad: \(error)")
-            }
-        } else {
-            print("CrackleAdView is nil")
-        }
+        self.navigationController?.pushViewController(BannerVC(), animated: false)
     }
-    
-    @objc func loadLarge() {
-        if let crackleAdView = crackleAdView {
-            do {
-                try crackleAdView.setAdSizes(adSizes: [AdSize.large])
-                crackleAdView.setListener(crackleAdViewAdListener: MyAdListener())
-                try crackleAdView.loadAd()
-                adSpace.addSubview(crackleAdView)
-                crackleAdView.translatesAutoresizingMaskIntoConstraints = false
-
-                // Activate constraints
-                NSLayoutConstraint.activate([
-                    crackleAdView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                    crackleAdView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                    crackleAdView.widthAnchor.constraint(equalToConstant: 320),
-                    crackleAdView.heightAnchor.constraint(equalToConstant: 100)
-                ])
-            } catch {
-                print("Error loading ad: \(error)")
-            }
-        } else {
-            print("CrackleAdView is nil")
-        }
-    }
-    @objc func loadMREC() {
-        if let crackleAdView = crackleAdView {
-            do {
-                try crackleAdView.setAdSizes(adSizes: [AdSize.rectangle])
-                crackleAdView.setListener(crackleAdViewAdListener: MyAdListener())
-                try crackleAdView.loadAd()
-                adSpace.addSubview(crackleAdView)
-                crackleAdView.translatesAutoresizingMaskIntoConstraints = false
-
-                // Activate constraints
-                NSLayoutConstraint.activate([
-                    crackleAdView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                    crackleAdView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                    crackleAdView.widthAnchor.constraint(equalToConstant: 250),
-                    crackleAdView.heightAnchor.constraint(equalToConstant: 250)
-                ])
-            } catch {
-                print("Error loading ad: \(error)")
-            }
-        } else {
-            print("CrackleAdView is nil")
-        }
-    }
-    @objc func loadLeaderBoard() {
-        crackleAdView?.startRefreshRate(seconds: TimeInterval(30))
-    }
-    
     
     @objc func loadInt() {
         print("load intersitaionlal called")
         if(CrackleInterstitialAd.shared.isReady()) {
-            CrackleInterstitialAd.shared.showAd(viewController: self)
+            CrackleInterstitialAd.shared.showAd()
         } else {
             CrackleInterstitialAd.shared.loadAd()
         }
@@ -280,65 +147,17 @@ class CardSelectionVC: UIViewController {
         }
     }
     
-    func configureAds() {
-        //        /6499/example/adaptive-banner
-        //        /23043175892/tech.crackle.DemoIOSApp/test_banner1_DemoIOSApp
-        //        /23043175892/P4u4pb/tech_crackle_tempApp/P4u4pb_IOS_48_BAN_250_300_1
-//        if let crackleAdView = crackleAdView {
-//            do {
-//                try crackleAdView.setAdSizes(adSizes: [AdSize.banner])
-//                crackleAdView.setListener(crackleAdViewAdListener: MyAdListener())
-//                try crackleAdView.loadAd()
-//                view.addSubview(crackleAdView)
-//                crackleAdView.translatesAutoresizingMaskIntoConstraints = false
-//
-//                // Activate constraints
-//                NSLayoutConstraint.activate([
-//                    crackleAdView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//                    crackleAdView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//                    crackleAdView.widthAnchor.constraint(equalToConstant: 728),
-//                    crackleAdView.heightAnchor.constraint(equalToConstant: 90)
-//                ])
-//            } catch {
-//                print("Error loading ad: \(error)")
-//            }
-//        } else {
-//            print("CrackleAdView is nil")
-//        }
+    @objc func loadRewInt() {
+        print("load rewarded called")
+        if(CrackleRewardedInterstitialAd.shared.isReady()) {
+            CrackleRewardedInterstitialAd.shared.showAd(listener: crackleUserRewardListener() as! CrackleUserRewardListener)
+        } else {
+            CrackleRewardedInterstitialAd.shared.loadAd()
+        }
     }
     
-    private class mAAdViewAdDelegate: NSObject, MAAdViewAdDelegate{
-        func didExpand(_ ad: MAAd) {
-            
-        }
-        
-        func didCollapse(_ ad: MAAd) {
-            
-        }
-        
-        func didLoad(_ ad: MAAd) {
-            print("didLoad")
-        }
-        
-        func didFailToLoadAd(forAdUnitIdentifier adUnitIdentifier: String, withError error: MAError) {
-            
-        }
-        
-        func didDisplay(_ ad: MAAd) {
-            
-        }
-        
-        func didHide(_ ad: MAAd) {
-            
-        }
-        
-        func didClick(_ ad: MAAd) {
-            
-        }
-        
-        func didFail(toDisplay ad: MAAd, withError error: MAError) {
-            
-        }
+    @objc func loadNative() {
+        crackleAdLoader?.loadAd()
     }
 }
 
@@ -350,47 +169,6 @@ public func printCurrentTimeInMilliseconds() {
     print("Current Time (HH:mm:ss.SSS): \(formattedTime)")
   }
 
-
-class MyAdListener: CrackleAdViewAdListener {
-    func onAdLoaded() {
-        print("Ad loaded successfully.")
-    }
-    
-    func onAdFailedToLoad(adsError: AdsError) {
-        print("################# Ad failed to load.")
-        print(adsError.message)
-        print("load fail")
-        printCurrentTimeInMilliseconds()
-    }
-    
-    func onAdClicked() {
-        print("Ad clicked.")
-    }
-}
-
-class Toast {
-    static func showToast(message: String, duration: Double = 5.0) {
-        guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
-
-        let toastLabel = UILabel(frame: CGRect(x: window.frame.size.width/2 - 150, y: window.frame.size.height - 100, width: 300, height: 35))
-        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        toastLabel.textColor = UIColor.white
-        toastLabel.textAlignment = .center
-        toastLabel.font = UIFont(name: "Montserrat-Light", size: 12.0)
-        toastLabel.text = message
-        toastLabel.alpha = 1.0
-        toastLabel.layer.cornerRadius = 10
-        toastLabel.clipsToBounds = true
-        window.addSubview(toastLabel)
-        
-        UIView.animate(withDuration: duration, delay: 0.1, options: .curveEaseOut, animations: {
-            toastLabel.alpha = 0.0
-        }, completion: { (isCompleted) in
-            toastLabel.removeFromSuperview()
-        })
-    }
-}
-
 extension CardSelectionVC {
     class crackleInitializationCompleteListener: CrackleInitializationCompleteListener {
         
@@ -398,11 +176,9 @@ extension CardSelectionVC {
         
         init(viewController: UIViewController) {
             self.viewController = viewController
-//            GAM IS MAX
         }
         
         func onInitializationComplete() {
-            Toast.showToast(message: "Initialization complete")
         }
     }
     
@@ -414,7 +190,6 @@ extension CardSelectionVC {
     
     class crackleAdListener: CrackleAdListener {
         func onAdLoaded() {
-            Toast.showToast(message: "onAdLoaded Interstitial")
         }
         
         func onAdFailedToLoad(adsError: AdsError) {
@@ -436,20 +211,79 @@ extension CardSelectionVC {
         func onAdClicked() {
             
         }
+    }
+}
+
+class crackleAdListener: CrackleAdListener {
+    func onAdLoaded() {
+    }
+    
+    func onAdFailedToLoad(adsError: AdsError) {
         
+    }
+    
+    func onAdFailedToShow(adsError: AdsError) {
+        
+    }
+    
+    func onAdDisplayed() {
+        
+    }
+    
+    func onAdDismissed() {
+        
+    }
+    
+    func onAdClicked() {
+        
+    }
+}
+
+func configureAds() {
+    //        /6499/example/adaptive-banner
+    //        /23043175892/tech.crackle.DemoIOSApp/test_banner1_DemoIOSApp
+    //        /23043175892/P4u4pb/tech_crackle_tempApp/P4u4pb_IOS_48_BAN_250_300_1
+//        if let crackleAdView = crackleAdView {
+//            do {
+//                try crackleAdView.setAdSizes(adSizes: [AdSize.banner])
+//                crackleAdView.setListener(crackleAdViewAdListener: MyAdListener())
+//                try crackleAdView.loadAd()
+//                view.addSubview(crackleAdView)
+//                crackleAdView.translatesAutoresizingMaskIntoConstraints = false
+//
+//                // Activate constraints
+//                NSLayoutConstraint.activate([
+//                    crackleAdView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//                    crackleAdView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//                    crackleAdView.widthAnchor.constraint(equalToConstant: 728),
+//                    crackleAdView.heightAnchor.constraint(equalToConstant: 90)
+//                ])
+//            } catch {
+//                print("Error loading ad: \(error)")
+//            }
+//        } else {
+//            print("CrackleAdView is nil")
+//        }
+}
+
+
 //        weak var viewController: UIViewController?
-//        
+//
 //        init(viewController: UIViewController) {
 //            self.viewController = viewController
 //        }
-//        
+//
 //        func onInitializationComplete() {
 //            print("Initialization complete")
 //            DispatchQueue.main.async {
 //                Toast.showToast(message: "Initialization complete")
 //            }
 //        }
-    }
-}
 
-
+//        CrackleInterstitialAd.shared.setListener(crackleAdListener: )
+//        CrackleInterstitialAd.shared.setFrequencyCapping(numberOfAds: 2, timeIntervalInSec: TimeInterval(30*60))
+//        startTimer()
+//        CrackleInterstitialAd.shared.loadAd()
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: {
+//            CrackleInterstitialAd.shared.showAd(viewController: self)
+//        })

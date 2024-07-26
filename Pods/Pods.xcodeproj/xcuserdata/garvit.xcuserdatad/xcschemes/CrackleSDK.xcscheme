@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "893F408FD5D6A3B30645D4BFB8E24703"
-               BuildableName = "CoreSDK.framework"
-               BlueprintName = "CoreSDK"
+               BlueprintIdentifier = "F1F92F034B217C02BD9B0126059D22B8"
+               BuildableName = "CrackleSDK.framework"
+               BlueprintName = "CrackleSDK"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

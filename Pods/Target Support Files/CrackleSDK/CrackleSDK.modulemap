@@ -1,0 +1,6 @@
+framework module CrackleSDK {
+  umbrella header "CrackleSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}

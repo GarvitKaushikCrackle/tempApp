@@ -2,10 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CRACKLE_KEY</key>
+	<string>s2=1ed07b26d</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-8679307537685495~1496259278</string>
-	<key>MAX_KEY</key>
-	<string>g4tzDpoH9OoIqU27Hb1iWTqa9JqsZDaxzN2fhBxC0TWnyvMOnmBHW8NFE8biLVJ5c5N1F3gRRRTLbRSev0bybD</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

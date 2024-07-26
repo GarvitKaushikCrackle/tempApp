@@ -1,9 +1,9 @@
 {
-  "name": "CoreSDK",
+  "name": "CrackleSDK",
   "version": "0.0.1",
-  "summary": "CoreSDK is built by Crackle to enable publishers to maximize their revenue.",
+  "summary": "CrackleSDK is built by Crackle to enable publishers to maximize their revenue.",
   "description": "Use CoreSDK as a dependency in your app to monetize your application.",
-  "homepage": "http://EXAMPLE/CoreSDK",
+  "homepage": "http://EXAMPLE/CrackleSDK",
   "authors": {
     "GarvitKaushikCrackle": "gkaushik@crackle.tech"
   },
@@ -14,7 +14,7 @@
     "path": ".",
     "tag": "0.0.1"
   },
-  "source_files": "CoreSDK/**/*",
+  "source_files": "CrackleSDK/**/*",
   "static_framework": true,
   "frameworks": "UIKit",
   "dependencies": {

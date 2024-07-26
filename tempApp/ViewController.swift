@@ -6,13 +6,11 @@
 //
 
 import UIKit
-import CoreSDK
+import CrackleSDK
 
 class ViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
 }
 

@@ -13,7 +13,8 @@
 #import "GAMLoader.h"
 #import "ISLoader.h"
 #import "MAXLoader.h"
+#import "SdkInitialization.h"
 
-FOUNDATION_EXPORT double CoreSDKVersionNumber;
-FOUNDATION_EXPORT const unsigned char CoreSDKVersionString[];
+FOUNDATION_EXPORT double CrackleSDKVersionNumber;
+FOUNDATION_EXPORT const unsigned char CrackleSDKVersionString[];
 
