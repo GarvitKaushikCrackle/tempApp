@@ -1,0 +1,6 @@
+framework module testSDKGarvit {
+  umbrella header "testSDKGarvit-umbrella.h"
+
+  export *
+  module * { export * }
+}

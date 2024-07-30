@@ -1,3 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-tempApp/Pods-tempApp-frameworks.sh
+${BUILT_PRODUCTS_DIR}/testSDKGarvit/testSDKGarvit.framework
 ${PODS_XCFRAMEWORKS_BUILD_DIR}/AmazonPublisherServicesSDK/DTBiOSSDK.framework/DTBiOSSDK
 ${PODS_XCFRAMEWORKS_BUILD_DIR}/AppLovinSDK/AppLovinSDK.framework/AppLovinSDK

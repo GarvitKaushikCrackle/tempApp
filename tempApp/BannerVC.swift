@@ -22,13 +22,13 @@ class BannerVC: UIViewController {
     var crackleAdView: CrackleAdView!
     
     var buttons: [CWButton]!
-    var buttonActions: [() -> Void]!
+    var buttonActions: [Selector]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         buttons = [bannerButton, largeBannerButton, mrecButton, leaderBoardButton, adaptiveBannerButton, customBannerButton, pauseButton, playButton, playButton]
-        buttonActions = [loadBanner, loadLarge, loadMREC, loadLeader, loadAdaptive, loadCustom, pauseRef, playRef, playRef]
+        buttonActions = [#selector(loadBanner), #selector(loadLarge), #selector(loadMREC), #selector(loadLeader), #selector(loadAdaptive), #selector(loadCustom), #selector(pauseRef), #selector(playRef), #selector(playRef)]
         configureUI()
         crackleAdView = CrackleAdView(viewController: self)
         crackleAdView.setListener(crackleAdViewAdListener: MyAdListener())
@@ -86,7 +86,7 @@ class BannerVC: UIViewController {
         // Add 3 UI elements to the row stack view
         for i in 0..<3 {
             let element = buttons[idx*3 + i]
-            buttons[idx*3 + i].addTarget(self, action: #selector(loadBanner), for: .touchUpInside)
+            element.addTarget(self, action: buttonActions[idx*3 + i], for: .touchUpInside)
             rowStackView.addArrangedSubview(element)
         }
         
@@ -114,42 +114,59 @@ class BannerVC: UIViewController {
         NSLayoutConstraint.activate([
             crackleAdView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             crackleAdView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            crackleAdView.widthAnchor.constraint(equalToConstant: 320),
-            crackleAdView.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
     
     @objc func loadMREC() {
-            crackleAdView.setAdSizes(adSizes: [AdSize.rectangle])
-            crackleAdView.loadAd()
-            adSpace.addSubview(crackleAdView)
-            crackleAdView.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                    crackleAdView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                    crackleAdView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                    crackleAdView.widthAnchor.constraint(equalToConstant: 250),
-                    crackleAdView.heightAnchor.constraint(equalToConstant: 250)
-            ])
+        crackleAdView.setAdSizes(adSizes: [AdSize.rectangle])
+        crackleAdView.loadAd()
+        adSpace.addSubview(crackleAdView)
+        crackleAdView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+                crackleAdView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                crackleAdView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+        ])
+    }
+    
+    @objc func loadLeader() {
+        crackleAdView.setAdSizes(adSizes: [AdSize.leaderboard])
+        crackleAdView.loadAd()
+        adSpace.addSubview(crackleAdView)
+        crackleAdView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+                crackleAdView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                crackleAdView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+        ])
+    }
+    
+    @objc func loadAdaptive() {
+        crackleAdView.setAdSizes(adSizes: [AdSize.adaptive(width: 150)])
+        crackleAdView.loadAd()
+        adSpace.addSubview(crackleAdView)
+        crackleAdView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+                crackleAdView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                crackleAdView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+        ])
+    }
+    
+    @objc func loadCustom() {
+        crackleAdView.setAdSizes(adSizes: [AdSize.custom(width: 100, height: 100)])
+        crackleAdView.loadAd()
+        adSpace.addSubview(crackleAdView)
+        crackleAdView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+                crackleAdView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                crackleAdView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+        ])
     }
     
     @objc func pauseRef() {
-//        crackleAdView.pauseRefreshRate()
+        crackleAdView.pauseRefreshRate()
     }
     
     @objc func playRef() {
         crackleAdView.startRefreshRate(seconds: TimeInterval(30))
-    }
-    
-    func loadLeader() {
-        
-    }
-    
-    func loadAdaptive() {
-        
-    }
-    
-    func loadCustom() {
-        
     }
 }
 

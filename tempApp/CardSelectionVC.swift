@@ -7,6 +7,7 @@
 
 import UIKit
 import CrackleSDK
+import testSDKGarvit
 
 class CardSelectionVC: UIViewController {
     let bannerButton = CWButton(backgroundColor: .systemRed, title: "banner")
@@ -18,34 +19,38 @@ class CardSelectionVC: UIViewController {
     let adSpace = UIView()
     
     var crackleAdLoader: CrackleAdLoader!
+    var crackleAdListener: CrackleAdListener!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let testSDK1 = testSDK()
+        testSDK1.logger_public()
         view.backgroundColor = .systemBackground
         CrackleSDK.shared.initialize(viewController: self){}
-//        CoreSDK.shared.startLoadingAds(viewController: self, placementName: [])
-        
-//        crackleAdLoader = CrackleAdLoader.Builder(viewController: self, adUnitId: "").forNativeAd(callback: {crackleNativeAd in
-//            let nativeAdView = Bundle.main.loadNibNamed("CustomNativeAdView", owner: nil, options: nil)?.first as! CrackleNativeAdView
-//            (nativeAdView.headlineView as? UILabel)?.text = "Garvit Kaushik"
-//            (nativeAdView.bodyView as? UILabel)?.text = crackleNativeAd.body
-//            (nativeAdView.callToActionView as? UIButton)?.setTitle(crackleNativeAd.callToAction, for: .normal)
-//            (nativeAdView.iconView as? UIImageView)?.image = crackleNativeAd.iconDrawable
-//            (nativeAdView.storeView as? UILabel)?.text = crackleNativeAd.store
-////            (nativeAdView.priceView as? UILabel)?.text = crackleNativeAd.price
+        crackleAdListener = CrackleAdListenerClass()
+        CrackleInterstitialAd.setListener(crackleAdListener: crackleAdListener)
+        CrackleRewardedAd.setListener(crackleAdListener: crackleAdListener)
+        CrackleRewardedInterstitialAd.setListener(crackleAdListener: crackleAdListener)
+        crackleAdLoader = CrackleAdLoader.Builder(viewController: self, adUnitId: "").forNativeAd(callback: {crackleNativeAd in
+            let nativeAdView = Bundle.main.loadNibNamed("UnifiedNativeAdView", owner: nil, options: nil)?.first as! CrackleNativeAdView
+            nativeAdView.registerNativeAd(crackleNativeAd: crackleNativeAd)
+            (nativeAdView.headlineView as? UILabel)?.text = crackleNativeAd.headline
+            (nativeAdView.bodyView as? UILabel)?.text = crackleNativeAd.body
+            (nativeAdView.callToActionView as? UIButton)?.setTitle(crackleNativeAd.callToAction, for: .normal)
+            (nativeAdView.iconView as? UIImageView)?.image = crackleNativeAd.iconDrawable
+            (nativeAdView.storeView as? UILabel)?.text = crackleNativeAd.store
+//            (nativeAdView.priceView as? UILabel)?.text = crackleNativeAd.price
 //            (nativeAdView.advertiserView as? UILabel)?.text = crackleNativeAd.advertiser
-//            nativeAdView.callToActionView?.isUserInteractionEnabled = false
-//            nativeAdView.registerNativeAd(crackleNativeAd: crackleNativeAd)
-//            nativeAdView.translatesAutoresizingMaskIntoConstraints = false
-//
-//            self.adSpace.addSubview(nativeAdView)
-//            NSLayoutConstraint.activate([
-//                nativeAdView.heightAnchor.constraint(equalToConstant: 50),
-//                nativeAdView.widthAnchor.constraint(equalToConstant: 320),
-//                nativeAdView.centerXAnchor.constraint(equalTo: self.adSpace.centerXAnchor)
-//            ])
-//        }).build()
-
+            nativeAdView.callToActionView?.isUserInteractionEnabled = false
+            nativeAdView.translatesAutoresizingMaskIntoConstraints = false
+            self.adSpace.addSubview(nativeAdView)
+            NSLayoutConstraint.activate([
+                nativeAdView.centerXAnchor.constraint(equalTo: self.adSpace.centerXAnchor),
+                nativeAdView.topAnchor.constraint(equalTo: self.adSpace.safeAreaLayoutGuide.topAnchor),
+                nativeAdView.widthAnchor.constraint(equalToConstant: 320),
+                nativeAdView.heightAnchor.constraint(equalToConstant: 50)
+            ])
+        }).build()
         configureUI()
     }
     
@@ -130,44 +135,33 @@ class CardSelectionVC: UIViewController {
     }
     
     @objc func loadInt() {
-        print("load intersitaionlal called")
-        if(CrackleInterstitialAd.shared.isReady()) {
-            CrackleInterstitialAd.shared.showAd()
+        if(CrackleInterstitialAd.isReady()) {
+            CrackleInterstitialAd.showAd()
         } else {
-            CrackleInterstitialAd.shared.loadAd()
+            CrackleInterstitialAd.loadAd()
         }
     }
     
     @objc func loadRew() {
-        print("load rewarded called")
-        if(CrackleRewardedAd.shared.isReady()) {
-            CrackleRewardedAd.shared.showAd(listener: crackleUserRewardListener())
+        if(CrackleRewardedAd.isReady()) {
+            CrackleRewardedAd.showAd(crackleUserRewardListener: crackleUserRewardListener())
         } else {
-            CrackleRewardedAd.shared.loadAd()
+            CrackleRewardedAd.loadAd()
         }
     }
     
     @objc func loadRewInt() {
-        print("load rewarded called")
-        if(CrackleRewardedInterstitialAd.shared.isReady()) {
-            CrackleRewardedInterstitialAd.shared.showAd(listener: crackleUserRewardListener() as! CrackleUserRewardListener)
+        if(CrackleRewardedInterstitialAd.isReady()) {
+            CrackleRewardedInterstitialAd.showAd(listener: crackleUserRewardListener())
         } else {
-            CrackleRewardedInterstitialAd.shared.loadAd()
+            CrackleRewardedInterstitialAd.loadAd()
         }
     }
     
     @objc func loadNative() {
-        crackleAdLoader?.loadAd()
+        crackleAdLoader.loadAd()
     }
 }
-
-public func printCurrentTimeInMilliseconds() {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "HH:mm:ss.SSS" // Hour:Minute:Second.Milliseconds
-    let now = Date()
-    let formattedTime = formatter.string(from: now)
-    print("Current Time (HH:mm:ss.SSS): \(formattedTime)")
-  }
 
 extension CardSelectionVC {
     class crackleInitializationCompleteListener: CrackleInitializationCompleteListener {
@@ -184,106 +178,60 @@ extension CardSelectionVC {
     
     class crackleUserRewardListener: CrackleUserRewardListener {
         func onUserRewarded(crackleReward: CrackleReward) {
-            print(crackleReward.amount, crackleReward.type)
+            Toast.show(message: "reward amount \(crackleReward.amount)")
         }
     }
     
-    class crackleAdListener: CrackleAdListener {
+    class CrackleAdListenerClass: CrackleAdListener {
         func onAdLoaded() {
+            print("Full screen onAdLoaded")
         }
         
         func onAdFailedToLoad(adsError: AdsError) {
-            
+            print("Full screen onAdFailedToLoad")
+            print(adsError.message)
         }
         
         func onAdFailedToShow(adsError: AdsError) {
-            
+            print("Full screen onAdFailedToShow")
+            print(adsError.message)
         }
         
         func onAdDisplayed() {
-            
+            print("Full screen onAdDisplayed")
         }
         
         func onAdDismissed() {
-            
+            print("Full screen onAdDismissed")
         }
         
         func onAdClicked() {
-            
+            print("Full screen onAdClicked")
         }
     }
 }
-
-class crackleAdListener: CrackleAdListener {
-    func onAdLoaded() {
-    }
-    
-    func onAdFailedToLoad(adsError: AdsError) {
+class Toast {
+    static func show(message: String, duration: TimeInterval = 3.0) {
+        guard let window = UIApplication.shared.keyWindow else {
+            return
+        }
         
-    }
-    
-    func onAdFailedToShow(adsError: AdsError) {
+        let toastLabel = UILabel(frame: CGRect(x: window.frame.size.width / 2 - 150, y: window.frame.size.height - 100, width: 300, height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.textAlignment = .center
+        toastLabel.font = UIFont(name: "Montserrat-Regular", size: 12.0)
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10
+        toastLabel.clipsToBounds = true
+        window.addSubview(toastLabel)
         
-    }
-    
-    func onAdDisplayed() {
-        
-    }
-    
-    func onAdDismissed() {
-        
-    }
-    
-    func onAdClicked() {
-        
+        UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: { (isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
     }
 }
 
-func configureAds() {
-    //        /6499/example/adaptive-banner
-    //        /23043175892/tech.crackle.DemoIOSApp/test_banner1_DemoIOSApp
-    //        /23043175892/P4u4pb/tech_crackle_tempApp/P4u4pb_IOS_48_BAN_250_300_1
-//        if let crackleAdView = crackleAdView {
-//            do {
-//                try crackleAdView.setAdSizes(adSizes: [AdSize.banner])
-//                crackleAdView.setListener(crackleAdViewAdListener: MyAdListener())
-//                try crackleAdView.loadAd()
-//                view.addSubview(crackleAdView)
-//                crackleAdView.translatesAutoresizingMaskIntoConstraints = false
-//
-//                // Activate constraints
-//                NSLayoutConstraint.activate([
-//                    crackleAdView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//                    crackleAdView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//                    crackleAdView.widthAnchor.constraint(equalToConstant: 728),
-//                    crackleAdView.heightAnchor.constraint(equalToConstant: 90)
-//                ])
-//            } catch {
-//                print("Error loading ad: \(error)")
-//            }
-//        } else {
-//            print("CrackleAdView is nil")
-//        }
-}
-
-
-//        weak var viewController: UIViewController?
-//
-//        init(viewController: UIViewController) {
-//            self.viewController = viewController
-//        }
-//
-//        func onInitializationComplete() {
-//            print("Initialization complete")
-//            DispatchQueue.main.async {
-//                Toast.showToast(message: "Initialization complete")
-//            }
-//        }
-
-//        CrackleInterstitialAd.shared.setListener(crackleAdListener: )
-//        CrackleInterstitialAd.shared.setFrequencyCapping(numberOfAds: 2, timeIntervalInSec: TimeInterval(30*60))
-//        startTimer()
-//        CrackleInterstitialAd.shared.loadAd()
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: {
-//            CrackleInterstitialAd.shared.showAd(viewController: self)
-//        })

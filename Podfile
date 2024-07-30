@@ -13,4 +13,5 @@ target 'tempApp' do
   pod 'CrackleSDK', :path => '../../CrackleSDK'
   pod 'IronSourceAppLovinAdapter','4.3.46.2'
   pod 'IronSourceAPSAdapter','4.3.13.4'
+  pod 'testSDKGarvit','0.0.1'
 end

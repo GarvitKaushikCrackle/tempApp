@@ -17,6 +17,7 @@ PODS:
     - AmazonPublisherServicesSDK (= 4.9.3)
     - IronSourceSDK (= 8.1.1.0)
   - IronSourceSDK (8.1.1.0)
+  - testSDKGarvit (0.0.1)
 
 DEPENDENCIES:
   - AppLovinSDK
@@ -25,6 +26,7 @@ DEPENDENCIES:
   - IronSourceAppLovinAdapter (= 4.3.46.2)
   - IronSourceAPSAdapter (= 4.3.13.4)
   - IronSourceSDK (= 8.1.1.0)
+  - testSDKGarvit (= 0.0.1)
 
 SPEC REPOS:
   trunk:
@@ -35,6 +37,7 @@ SPEC REPOS:
     - IronSourceAppLovinAdapter
     - IronSourceAPSAdapter
     - IronSourceSDK
+    - testSDKGarvit
 
 EXTERNAL SOURCES:
   CrackleSDK:
@@ -43,13 +46,14 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AmazonPublisherServicesSDK: 637a51454e0d7c37c8cb75628b30129f58908a56
   AppLovinSDK: 626d2aea57ae1bf9280d2012e8e20c521c58ce28
-  CrackleSDK: 51fc03c3b30144c8a7ff8eb7cf4c694bbd89002a
+  CrackleSDK: 3f997473263f0dd8de8ad849affdefa32adfdca8
   Google-Mobile-Ads-SDK: 7db2098033ad3bfcd72a11e7503b49700a93029e
   GoogleUserMessagingPlatform: f131fa7978d2ba88d7426702b057c2cc318e6595
   IronSourceAppLovinAdapter: 1718640c1f4bf1381b3b5dacdcc373b43b2d817f
   IronSourceAPSAdapter: bef973123fe8913aa612cfe52242941be79e4b7e
   IronSourceSDK: f44778e8b9b76b33130b4cbc11e722ff1c7d1813
+  testSDKGarvit: 581023337e10715529b4af401e2e4a5d76f67761
 
-PODFILE CHECKSUM: ced01a3aff18d6ed74f3371f49ef37a3362752e2
+PODFILE CHECKSUM: 5b4a8b6a9f64e2d6396dd78f0921f97b7e703482
 
 COCOAPODS: 1.15.2

@@ -2,8 +2,12 @@
   "name": "CrackleSDK",
   "version": "0.0.1",
   "summary": "CrackleSDK is built by Crackle to enable publishers to maximize their revenue.",
-  "description": "Use CoreSDK as a dependency in your app to monetize your application.",
-  "homepage": "http://EXAMPLE/CrackleSDK",
+  "description": "Use CrackleSDK as a pod dependency in your app to start monetizing your application. For integrating the SDK in your app follow the IOS documentation - https://crackle.co.in/documentation/",
+  "homepage": "https://crackle.co.in/documentation/",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
   "authors": {
     "GarvitKaushikCrackle": "gkaushik@crackle.tech"
   },
@@ -11,7 +15,7 @@
     "ios": "13.0"
   },
   "source": {
-    "path": ".",
+    "git": "https://bitbucket.org/crackle-tech/coresdk/src/dev/",
     "tag": "0.0.1"
   },
   "source_files": "CrackleSDK/**/*",
@@ -33,7 +37,5 @@
     "IronSourceAPSAdapter": [
       "4.3.13.4"
     ]
-  },
-  "swift_versions": "5.0",
-  "swift_version": "5.0"
+  }
 }
